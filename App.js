@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View, StyleSheet, Text, Button} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {fcmService} from './src/FCMService';
 import {localNotificationService} from './src/LocalNotificationService';
 
@@ -8,7 +8,6 @@ export default function App() {
     fcmService.registerAppWithFCM();
     fcmService.register(onRegister, onNotification, onOpenNotification);
     localNotificationService.configure(onOpenNotification);
-
     function onRegister(token) {
       console.log('[App] onRegister: ', token);
     }
@@ -45,6 +44,12 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Demo push notification React Native Firebase V7</Text>
+      <TouchableOpacity
+        onPress={() => {
+          localNotificationService.subscribeToTopic('12345');
+        }}>
+        <Text>SubcrieTopic</Text>
+      </TouchableOpacity>
     </View>
   );
 }

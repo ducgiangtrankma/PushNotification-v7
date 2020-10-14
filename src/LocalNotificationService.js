@@ -49,7 +49,14 @@ class LocalNotificationService {
   unregister = () => {
     PushNotification.unregister();
   };
-
+  subscribeToTopic = (topicID) => {
+    if (Platform.OS === 'android') {
+      PushNotification.subscribeToTopic(topicID);
+    }
+  };
+  unsubscribeFromTopic = (topicID) => {
+    PushNotification.unsubscribeFromTopic(topicID);
+  };
   showNotification = (id, title, message, data = {}, options = {}) => {
     PushNotification.localNotification({
       /* Android Only Properties */
